@@ -8,7 +8,14 @@ var dsp_LabsCtrl = function($scope, AjaxService, CurrentLabService , BreadCrumbs
 	self.filteredLabels = []	;
 	self.filteredRepos = []
 
-	
+	$scope.difficulty = {
+		availableOptions: [
+		  {id: '1', name: 'Beginner'},
+		  {id: '2', name: 'Medium'},
+		  {id: '3', name: 'Advanced'},
+		  {id: '4', name: 'Expert'},
+		]};
+		
 	BreadCrumbs.breadCrumbs('/labs')
 	CurrentLabService.resetLab()
 	var urlRedirect =  '/lab/use/';
