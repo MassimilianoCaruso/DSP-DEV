@@ -1,0 +1,171 @@
+<style id="compiled-css" type="text/css">
+.drop-box {
+  background: #F8F8F8;
+  border: 5px dashed #DDD;
+  width: 200px;
+  height: 65px;
+  text-align: center;
+  padding-top: 25px;
+  margin: 11px;
+}
+.dragover {
+  border: 5px dashed blue;
+}
+.ace_editor { height: 500px; }
+.ace-build { height: 500px; }
+
+</style>
+<div class="modal-header">
+  <!-- <h3 class="modal-title" id="modal-title">{{$ctrl.dockerfile.name}}</h3> -->
+  <div class="row">
+          <div class="col col-sm-1 col-sm-offset-9">
+            <button type="button" class="btn btn-warning" ng-click="goToImages()">
+              Come Back
+            </button>
+          </div>
+
+  </div>
+
+  <div class="modal-body" id="modal-body">
+    <div class="btn btn-default" ngf-select="upload($files)" ngf-multiple="true">Add File</div>
+    Drop File:
+    <div ngf-drop ngf-select ng-model="files" class="drop-box" 
+                                              ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-include-dir="true" ngf-allow-dir="true"
+                                                                                                                          >Drag and Drop file</div>
+    <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+    <!-- Files: -->
+    <!-- <ul> -->
+    <!--   <li ng-repeat="f in files" style="font:smaller">{{f.name}} {{f.$error}} {{f.$errorParam}}</li> -->
+    <!-- </ul> -->
+    Upload Log:
+    <pre>{{log}}</pre>
+    <div class="row">
+      <div class="col col-sm-offset-3">
+        Selected element:  <b>{{selectedElement.selected}}   
+          <button type="button" ng-click="removeElement()" class="btn btn-default">
+            <span class="glyphicon glyphicon-remove-circle"></span>  Delete
+          </button>
+          <label> Executable:
+            <input type="checkbox" ng-model="selectedElement.isExecutable" ng-click=saveExecutable()>
+          </label><br/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+
+        <br />
+        <js-tree 
+           tree-data="scope" 
+           tree-model="treeModel"
+           tree-events="select_node:nodeSelected"
+           ></js-tree>
+          <br />
+      <div class="row">
+			  <div class="col-sm-9">
+          <input type="text" class="form-control" ng-model="newFile" placeholder="new file" id="namefile"/> 
+			  </div>
+			  <div class="col-sm-3">
+          <button ng-disabled="!newFile" ng-click="addNewFile()" class="btn btn-success btn-small" > Add </button>
+        </div>
+      </div>
+      </div>
+      
+      <div ng-show="selectedElement.type === 'textfile'" class="col-sm-9" ui-ace="{
+      theme: 'terminal',
+      mode: 'yaml'
+      }"
+                                                                          ng-model=selectedElement.content
+                                                                          >
+      </div>
+    </div>
+        <br/>
+
+        <!-- <p class="row"> -->
+        <!--   <div class="col-sm-6"><label> Select File From Host </label> </div> -->
+        <!--   <div class="col-sm-6"><input text ng-model="$ctrl.hostPath" ></div> -->
+        <!-- </p> -->
+        <!-- <p class="row"> -->
+        <!--   <div class="col-sm-6"><label> Select Container Destination Dir</label> </div> -->
+        <!--   <div class="col-sm-6"><input text ng-model="$ctrl.containerPath" ></div> -->
+        <!-- </p> -->
+
+        <div class="row">
+          <div class="col col-sm-2">
+           <input type="checkbox" ng-model="needToPush"/>Push image?
+          </div>
+        <div class="col col-sm-4">
+          <label class="control-label" for="tag">Tag image:   </label>
+          <input name="tag" class="form-check-input" type="text" ng-model=tagImage > 
+        </div>
+          <div class="col col-sm-4 col-sm-offset-1">
+            <button type="button" class="btn btn-success" ng-click="saveDockerfile()">
+              <span class="glyphicon glyphicon-floppy-save"></span> Save and Build Image
+            </button>
+            <!-- <button type="button" class="btn btn-primary" ng-click="run()"> -->
+            <!--   <span class="glyphicon glyphicon-play"></span> Run Test -->
+            <!-- </button> -->
+          </div>
+
+          <!-- <div ng-show="notify !== ''" class="alert alert-info" id="notify" ng-bind-html="notify"> -->
+          </div>
+          <br>
+          <br />
+          <div ng-show="notify" class="row">
+            <div class="col col-sm-offset-10">
+              <button class="btn btn-default" ng-click="clearBuild()"> <span class="glyphicon glyphicon-remove-circle"> </span>Close Panel </button>
+            </div>
+
+          </div>
+          <div class="ace-build" ng-show="notify" ui-ace="{
+                theme: 'terminal',
+                mode: 'yaml'
+                }"
+                ng-model=notify
+         >
+          </div>
+        </div>
+    <div>
+      <div class="panel panel-default" ng-show="selectedElement.selected == 'Dockerfile'">  
+        <div class="panel-heading"><i class="fa fa-fw fa-cube"></i> 
+          Code Snippets
+          <div class="btn-group">
+            <label ng-repeat="c in snippetList.categories" class="btn btn-primary" ng-model="selectedCategory" ng-click="changedCategory(c.name)">{{c.name}}</label>
+          </div>
+        </div>
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th class="w-25">Name</th>
+              <th class="w-50">Description</th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="s in snippetList.snippets | filter: {category: selectedCategory}">
+              <!--<td>
+                  <div class="label label-primary" style="background-color:{{s.color}}">&nbsp;</div>
+              </td>-->
+              <td>
+                {{s.name}}
+              </td>
+              <td>
+                {{s.description}}
+              </td>
+              <td class="text-right">
+                <div class="btn-group btn-group-xs">
+                  <a class="btn btn-default editing-components" uib-popover="Add" popover-trigger="'mouseenter'" ng-click="changedSnippet(s)">
+                    <i class="fa fa-fw fa-plus"></i>
+                  </a>
+                  <a class="btn btn-danger editing-components" uib-popover="Undo" popover-trigger="'mouseenter'" ng-click="undoChangeSnippet(s)">
+                    <i class="fa fa-fw fa-undo"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table> 
+        </div>
+
+      </div> 
+   
+    </div>

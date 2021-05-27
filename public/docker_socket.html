@@ -1,0 +1,42 @@
+<!doctype html>
+<script>
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
+const serviceName = getUrlParameter("serviceName");
+document.title = serviceName;
+
+
+
+</script>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="/webshell/hterm_all.js"></script>
+    <script src="/webshell/socket.io/socket.io.js"></script>
+    <script src="/webshell/webshell.js"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0px;
+        }
+        #terminal {
+            display: block;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="terminal"></div>
+</body>
+
+</html>
