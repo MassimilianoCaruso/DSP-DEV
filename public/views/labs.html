@@ -63,7 +63,7 @@
           <table class="table table-hover">
             <tbody>
 
-              <tr ng-repeat="l in r.labs | filter :{name:filterName} | filter:ctrl.hasLabel | filter:ctrl.hasDiff">
+              <tr ng-repeat="l in r.labs | filter :{name:filterName} | filter:ctrl.hasLabel | filter:ctrl.difficultyCheck">
                 <td>
                   <h5><i class="fa fa-fw fa-cube"></i> <a href="#" ng-click="ctrl.getURL(r.name, l.name)" title="Open {{l.name }} lab"> {{l.name }}</a></h5>
                   {{l.informations.description}}

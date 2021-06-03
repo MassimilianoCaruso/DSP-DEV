@@ -77,7 +77,7 @@ var dsp_LabsCtrl = function($scope, AjaxService, CurrentLabService , BreadCrumbs
 	}
 
 	//Filter by difficulty
-	self.hasDiff = function hasDiff(lab) {
+	self.difficultyCheck = function difficultyCheck(lab) {
 		
 		if(_.isEmpty(self.filteredDifficulty))
 			return true;
