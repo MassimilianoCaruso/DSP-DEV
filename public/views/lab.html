@@ -10,9 +10,9 @@
     font-size: 0.9em;
   }
   .beginner{color: green}
-  .medium{color: blue}
-  .advanced{color: orange}
-  .expert{color: red}
+  .medium{color: orange}
+  .advanced{color: red}
+  .expert{color: purple}
 </style>
 <div id="page-wrapper">
   <script src="assets/mxgraph/common.js"> </script>
@@ -46,13 +46,12 @@
         <!-- <h3 class="media-heading" class="single-line" on-finish="changeLabName()" contenteditable="true" ng-model="currentName">{{ctrl.lab.name}}</h3> -->
         <div layout="column">
           <h3 class="media-heading" class="single-line" ng-model="currentName">{{ctrl.lab.name}}</h3>
-          <div layout="row">Difficulty:&nbsp
-            <div ng-show="ctrl.lab.difficulty" ng-class="{'beginner': ctrl.lab.difficulty=='Beginner', 'medium': ctrl.lab.difficulty=='Medium', 
-            'advanced': ctrl.lab.difficulty=='Advanced', 'expert': ctrl.lab.difficulty=='Expert'}">            
-              {{ctrl.lab.difficulty}} </div>
-            <div ng-show="!ctrl.lab.difficulty" ng-class="text-left">Unspecified!</div>
-          </div>
+          <h6><div layout="row">Difficulty:&nbsp
+          <div ng-show="ctrl.lab.difficulty"><span class="label label-default" style="background-color:{{ctrl.lab.color}}">{{ctrl.lab.difficulty}}</span></div>
+            <div ng-show="!ctrl.lab.difficulty"><span class="label label-default">Unspecified!</span></div>
+          </div></h6>
         </div>
+
         <ul class="list-inline">
           <li ng-repeat="label in ctrl.lab.labels">
             <span class="label label-primary" style="background-color:{{label.color}}"><i class="fa fa-fw fa-tag"></i> {{label.name}}</span>

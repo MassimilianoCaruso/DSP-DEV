@@ -349,6 +349,17 @@ var dsp_LabCtrl = function ($scope, $window, ServerResponse, $log, SocketService
                 vm.tinymceHtmlGoal = $sce.trustAsHtml(vm.lab.goal);
                 vm.tinymceHtmlSolution = $sce.trustAsHtml(vm.lab.solution);
                 vm.lab.difficulty = labToUse.informations.difficulty;
+                if (vm.lab.difficulty=='Beginner') {
+                  vm.lab.color='green';
+                } else if (vm.lab.difficulty=='Medium'){
+                  vm.lab.color='orange';
+                } else if (vm.lab.difficulty=='Advanced') {
+                  vm.lab.color='red';
+                } else if (vm.lab.difficulty=='Expert') {
+                  vm.lab.color='purple';
+                } else {
+                  vm.lab.color='silver';
+                }
               }
               else {
                 vm.lab.description = '';
