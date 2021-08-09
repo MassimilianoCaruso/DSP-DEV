@@ -1,0 +1,83 @@
+{
+  "name": "HackingCourse",
+  "children": [
+    {
+      "name": "Buffer Overflow",
+      "labels": "Buffer Overflow",
+      "children": [
+        { "name": "Buffer Overflow Medium",
+          "labels": "Buffer Overflow",
+          "difficulty": "Medium",
+          "dependsOn": [ "Buffer Overflow"]
+	},
+	{       "name": "Buffer Overflow Advanced",
+          "labels": "Buffer Overflow",
+          "difficulty": "Advanced",
+          "dependsOn": [ "Buffer Overflow"]
+	}
+      ],
+          "dependsOn": [ "HackingCourse"]},
+    {
+      "name": "Web Hacking",
+      "labels": "Web Hacking",
+      "children": [
+        { "name": "Web Hacking Expert",
+          "labels": "Web Hacking",
+          "difficulty": "Expert",
+          "dependsOn": [ "Web Hacking"],
+          "children": [
+            { "name": "L04_ScanningAndEnumeration",
+              "dependsOn": ["Web Hacking Expert"]
+            },
+            { "name": "L_EXTRA_Remote_Code_Execution",
+              "dependsOn": ["Web Hacking Expert"]}
+          ]
+	      },
+        { "name": "Web Hacking Medium",
+          "labels": "Web Hacking",
+          "difficulty": "Medium" ,
+          "dependsOn": [ "Web Hacking"],
+          "children": [
+            { "name": "L04_TFTPain",
+              "dependsOn": ["Web Hacking Medium"]},
+            { "name": "L_04_SMTPENumeration",
+              "dependsOn": ["Web Hacking Medium"]},
+            { "name": "Serializejavascript",
+              "dependsOn": ["Web Hacking Medium"]}
+          ]
+	      }
+      ],
+          "dependsOn": [ "HackingCourse"]},
+    {
+      "name": "Privilege Escalation",
+      "labels": "Privilege Escalation",
+      "children": [
+        { "name": "Privilege Escalation Advanced",
+          "labels": "Privilege Escalation",
+          "difficulty": "Advanced",
+          "dependsOn": [ "Privilege Escalation"]
+        },
+	{       "name": "Privilege Escalation Expert",
+          "labels": "Privilege Escalation",
+          "difficulty": "Expert",
+          "dependsOn": [ "Privilege Escalation"]
+	}
+      ],
+          "dependsOn": [ "HackingCourse"]},
+    {
+      "name": "Password Cracking",
+      "labels": "Password Cracking",
+      "children": [
+        { "name": "Password Cracking Beginner",
+          "labels": "Password Cracking",
+          "difficulty": "Beginner",
+          "dependsOn": [ "Password Cracking"]
+	},
+	{       "name": "Password Cracking Medium",
+          "labels": "Password Cracking",
+          "difficulty": "Medium",
+          "dependsOn": [ "Password Cracking"]
+	}
+      ],
+          "dependsOn": [ "HackingCourse"]}]
+}

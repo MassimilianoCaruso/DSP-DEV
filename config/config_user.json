@@ -1,0 +1,7 @@
+{
+  "name": "NS",
+  "mainDir": "dsp",
+  "dockerRepo": "dockersecplayground",
+  "githubURL": "https://github.com/NS-unina/DSP_Repo.git",
+  "username": "MassimilianoCarusoDev"
+}

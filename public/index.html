@@ -14,6 +14,7 @@
     mxBasePath = 'assets/mxgraph/';
   </script>
   <script src="assets/js/mxClient.js"></script>
+  <script src="assets/js/d3.v3.js"></script>
   <script src="assets/js/js-yaml.js"></script>
   <script src="assets/js/approve.min.js"></script>
   <!-- JS Libraries -->
@@ -97,6 +98,7 @@
   <script src="app/controllers/monitor_controller.js"></script>
   <script src="app/controllers/configCtrl.js"> </script>
   <script src="app/controllers/graph_editor_controller.js"></script>
+  <script src="app/controllers/treeCtrl.js"> </script>
 
   <!-- BOOTSTRAP STYLES-->
   <link href="assets/css/bootswatch-paper-bootstrap.css" type="text/css" rel="stylesheet">
@@ -305,6 +307,7 @@
       .controller('ManagedToolsCtrl', DSP_ManagedToolsCtrl)
       .controller('MonitorCtrl', DSP_MonitorCtrl)
       .controller("repoCtrl", dsp_RepoCtrl)
+      .controller("chartCtrl", dsp_chartCtrl)
       .run(['$anchorScroll', function ($anchorScroll) {
         $anchorScroll.yOffset = 50;   // always scroll by 50 extra pixels
       }])
@@ -342,6 +345,10 @@
           .when("/labs", {
             templateUrl: "views/labs.html",
             controller: "labsCtrl as ctrl"
+          })
+          .when("/training", {
+            templateUrl: "views/training.html",
+            controller: "chartCtrl as ctrl"
           })
           .when("/lab/:action/:repo/:namelab", {
             templateUrl: "views/lab.html",
