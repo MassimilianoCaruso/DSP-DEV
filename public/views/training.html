@@ -1,3 +1,4 @@
+<html>
 <head>
     <title>Training</title>
     <meta name="description">
@@ -41,6 +42,7 @@
              <input style="padding-top: 10px;" type="checkbox" name="checkb" value="Web Hacking"> <span class="slider round"></span></label>&nbsp&nbsp <span style="vertical-align: 4px;" > Web Hacking</span>
              <br />
             </div>
+            <hr>
             <b>Difficulty</b>
             <div class="input-group" id="difficultyFilter">
              <label class="switch">
@@ -56,11 +58,61 @@
              <input style="padding-top: 10px;" type="checkbox" name="checkb" value="Expert" > <span class="slider round"></span></label>&nbsp&nbsp <span style="vertical-align: 4px;" > Expert </span>
              <br />
             </div> 
-            <br />
         </form>
       </div>
     </div>
-
   </div>
 
+  <div class="stepp">
+  <md-card ng-init="selected = 0">
+    <md-steppers  md-selected="selected" md-stretch-steppers="always">
+      <md-step label="Lab1" md-complete="step1.completed">
+        <md-content>
+          <!--
+          <h1>
+          Lab 1
+          </h1>
+          -->
+          <iframe id="iframe0" name="myIframe0" frameborder="5" width="1500" height="1500"></iframe>
+          <md-button type="submit" class="md-raised md-primary" ng-click="selected = 1; step1.completed=true">NEXT</md-button>
+        </md-content>
+      </md-step>
+      <md-step label="Lab2" md-complete="step2.completed">
+        <md-content>
+          <!--
+          <h1>
+          Lab 2
+          </h1>
+          -->
+          <iframe id="iframe1" name="myIframe1" frameborder="5" width="1500" height="1500"></iframe>
+          <md-button class="md-raised md-primary" ng-click="selected = 0">PREV</md-button>
+          <md-button class="md-raised md-primary" ng-click="selected = 2; step2.completed=true">NEXT</md-button>
+        </md-content>
+      </md-step>
+        <md-content>
+          <md-step label="Lab3" md-complete="step3.completed">
+          <!--
+          <h1>
+          Lab 3
+          </h1>
+          -->
+          <iframe id="iframe2" name="myIframe2" frameborder="5" width="1500" height="1500"></iframe>
+          <md-button class="md-raised md-primary" ng-click="selected = 1">PREV</md-button>
+          <md-button class="md-raised md-primary" ng-click="selected = 3; step3.completed=true">NEXT</md-button>
+        </md-content>
+      </md-step>
+      <md-step label="Finish" md-complete="step3.completed">
+        <md-content>
+          <h1>
+          Finish
+          </h1>
+          <md-button class="md-raised md-primary" ng-click="selected = 2">PREV</md-button>
+        </md-content>
+      </md-step>
+    </md-steppers>
+  </md-card>
+  </div>
 </body>
+
+</body>
+</html>

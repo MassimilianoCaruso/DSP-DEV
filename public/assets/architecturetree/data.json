@@ -40,9 +40,9 @@
           "children": [
             { "name": "L04_TFTPain",
               "dependsOn": ["Web Hacking Medium"]},
-            { "name": "L_04_SMTPENumeration",
+            { "name": "L04_SMTPEnumeration",
               "dependsOn": ["Web Hacking Medium"]},
-            { "name": "Serializejavascript",
+            { "name": "SerializeJavascript",
               "dependsOn": ["Web Hacking Medium"]}
           ]
 	      }

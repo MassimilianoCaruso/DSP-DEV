@@ -34,6 +34,10 @@
 
   <script src="assets/js/angular-animate.min.js"></script>
   <script src="assets/js/angular-sanitize.min.js"></script>
+
+   <!-- MD-STEPPERS -->
+  <script src="assets/js/md-steppers.js"></script> 
+
   <!-- Markdown libraries-->
   <!-- <script src="assets/js/markdown-it.min.js"></script>
   <script src="assets/js/ng-markdownit.min.js"></script> -->
@@ -128,6 +132,7 @@
 
   <!-- MATERIAL FONT -->
   <link href="/assets/css/angular-material.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/md-steppers/dist/md-steppers.css">
 
   <!-- JSTree Imports -->
   <link rel="stylesheet" type="text/css" href="assets/jstree/themes/default/style.min.css">
@@ -144,7 +149,7 @@
       return window._; //Underscore must already be loaded on the page
     });
     //ANGULAR COMPONENT REGISTRATION 
-    angular.module("myApp", ['ui.tinymce', 'jsTree.directive', 'chieffancypants.loadingBar', 'ngAnimate', 'ngWebSocket', 'underscore', 'ngSanitize', 'ui.bootstrap', 'ui.select', 'ui-notification', 'ui.ace', 'ngRoute', 'colorpicker.module', 'ngMaterial', 'ngMessages', 'material.svgAssetsCache', 'ngFileUpload'])
+    angular.module("myApp", ['ui.tinymce', 'jsTree.directive', 'chieffancypants.loadingBar', 'ngAnimate', 'ngWebSocket', 'underscore', 'ngSanitize', 'ui.bootstrap', 'ui.select', 'ui-notification', 'ui.ace', 'ngRoute', 'colorpicker.module', 'ngMaterial', 'ngMessages', 'material.svgAssetsCache', 'ngFileUpload', 'md-steppers'])
       .directive('fileModel', ['$parse', function ($parse) {
         return {
           restrict: 'A',

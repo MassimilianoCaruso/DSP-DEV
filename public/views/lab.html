@@ -13,12 +13,20 @@
   .medium{color: orange}
   .advanced{color: red}
   .expert{color: purple}
+
 </style>
+
+
 <div id="page-wrapper">
   <script src="assets/mxgraph/common.js"> </script>
   <script src="assets/mxgraph/use_utils.js"> </script>
   <script>
     $(document).ready(function () {
+      // Check if the lab is shown inside an iframe
+      if (window.location !== window.parent.location) {
+    document.getElementById('header').style.display = "none";
+    document.getElementById('side-bar').style.display = "none";
+      }
       main(document.getElementById("graphContainer"));
       var appScope = angular.element(document.getElementById("page-wrapper")).scope()
       appScope.registerCallback(function (data) {

@@ -2,13 +2,15 @@ var dsp_chartCtrl = function () {
 
 var diameter = 960;
 
-var margin = {top: 500, right: 500, bottom: 500, left: 600},
+var margin = {top: 450, right: 500, bottom: 10, left: 600},
     width = diameter,
     height = diameter;
     
 var i = 0,
     duration = 350,
     root;
+
+var lab;
 
 var tree = d3.layout.tree()
     .size([360, diameter / 1.5 - 120])
@@ -20,7 +22,7 @@ var diagonal = d3.svg.diagonal.radial()
 
 var svg = d3.select("#graph").append("svg")
     .attr("width", diameter + margin.right + margin.left) 
-    .attr("height", diameter + margin.bottom + margin.top)
+    .attr("height", diameter - 200 + margin.bottom + margin.top) //  -200 To give space at the top for the next div in the html page
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -76,6 +78,7 @@ var update = function (source) {
       .attr("class", "node")
       .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
       //.on("click", click)
+      .on("dblclick", dblclick)
       .on('mouseover', function(d) {
       //var checkBox = 'input[type="checkbox"]'; // The fade only works if all boxes are checked
       //if ($(checkBox+':checked').length == $(checkBox).length) {
@@ -191,7 +194,6 @@ d3.selectAll("input[name=checkb]").on("change", function filterData() {
        })
        .style("font-weight", "normal")
        .style("fill", "black");
-       
     
     });
 
@@ -272,6 +274,21 @@ var collapse = function(d) {
       d._children = d.children;
       d._children.forEach(collapse);
       d.children = null;
+    }
+}
+
+// Double click to scroll down in the page up to the stepper that loads the labs of the selected training path
+var dblclick = function (d){
+  if(d.parent.name == 'Buffer Overflow' || d.parent.name == 'Password Cracking' || 
+     d.parent.name == 'Privilege Escalation' || d.parent.name == 'Web Hacking' ) {
+    $('html,body').animate({
+      scrollTop: $(".stepp").offset().top}, 'slow');
+        $(document).ready(function(){
+          for (var i=0; i<d.children.length; i++) {
+            lab=d.children[i].name;
+            $('#iframe'+i).attr('src', 'http://localhost:18181/lab/use/NS/'+lab);
+          };
+        });
     }
 }
 
