@@ -62,8 +62,16 @@
     </div>
   </div>
 
-  <ng-include src="'views/stepper-three-labs.html'"></ng-include>
-  <ng-include src="'views/stepper-two-labs.html'"></ng-include>
+
+  <div ng-include="ctrl.numlab==2 && 'views/stepper-two-labs.html' || 'views/stepper-three-labs.html'"></div> 
+
+<!--
+
+  <div id="include1" ng-hide="ctrl.numlab==2" ng-include src="'views/stepper-three-labs.html'"></ng-include>
+  <div id="include2" ng-show="ctrl.numlab==2" ng-include src="'views/stepper-two-labs.html'"></ng-include>
+
+  -->
+
 
 
 </body>

@@ -1,4 +1,6 @@
-var dsp_chartCtrl = function () {
+var dsp_chartCtrl = function ($scope) {
+
+var vm = this;
 
 var diameter = 960;
 
@@ -9,8 +11,6 @@ var margin = {top: 450, right: 500, bottom: 10, left: 600},
 var i = 0,
     duration = 350,
     root;
-
-var lab;
 
 var tree = d3.layout.tree()
     .size([360, diameter / 1.5 - 120])
@@ -77,7 +77,7 @@ var update = function (source) {
   var nodeEnter = node.enter().append("g")
       .attr("class", "node")
       .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
-      //.on("click", click)
+      .on("click", click)
       .on("dblclick", dblclick)
       .on('mouseover', function(d) {
       //var checkBox = 'input[type="checkbox"]'; // The fade only works if all boxes are checked
@@ -277,59 +277,25 @@ var collapse = function(d) {
     }
 }
 
+
 // Double click to scroll down in the page up to the stepper that loads the labs of the selected training path
-var dblclick = function (d){
+var click = function (d){
   if(d.parent.name == 'Buffer Overflow' || d.parent.name == 'Password Cracking' || 
      d.parent.name == 'Privilege Escalation' || d.parent.name == 'Web Hacking' ) {
-      //var stringa='<md-card ng-init="selected = 0">      <md-steppers  md-selected="selected" md-stretch-steppers="always">        <md-step label="Lab1" md-complete="step1.completed">          <md-content>            <iframe id="iframe0" name="myIframe0" frameborder="5" width="1500" height="1500"></iframe>            <md-button type="submit" class="md-raised md-primary" ng-click="selected = 1; step1.completed=true">NEXT</md-button>          </md-content>        </md-step>        <md-step label="Lab2" md-complete="step2.completed">          <md-content>            <iframe id="iframe1" name="myIframe1" frameborder="5" width="1500" height="1500"></iframe>            <md-button class="md-raised md-primary" ng-click="selected = 0">PREV</md-button>            <md-button class="md-raised md-primary" ng-click="selected = 2; step2.completed=true">NEXT</md-button>          </md-content>        </md-step>        <md-step label="Lab3" md-complete="step3.completed">          <md-content>            <iframe id="iframe2" name="myIframe2" frameborder="5" width="1500" height="1500"></iframe>            <md-button class="md-raised md-primary" ng-click="selected = 1">PREV</md-button>            <md-button class="md-raised md-primary" ng-click="selected = 3; step3.completed=true">NEXT</md-button>          </md-content>        </md-step>        <md-step label="Finish" md-complete="step3.completed">          <md-content>            <md-button class="md-raised md-primary" ng-click="selected = 2">PREV</md-button>          </md-content>        </md-step>      </md-steppers>    </md-card>';
-      //document.getElementById("step").innerHTML += stringa;
-    }
-    $('html,body').animate({
-      scrollTop: $(".step2labs").offset().top}, 'slow');
-        $(document).ready(function(){
-          //Qui si deve creare la roba nell'html
+       vm.numlab=d.children.length;
+          $(document).ready(function(){
           for(var i=0; i<d.children.length; i++) {
-            lab=d.children[i].name;
+            var lab=d.children[i].name;
             $('#iframe'+i).attr('src', 'http://localhost:18181/lab/use/NS/'+lab);
           }
-          
-        });
-    
-}
-
-
-/*
-
-var dblclick = function (d){
-  if(d.parent.name == 'Buffer Overflow' || d.parent.name == 'Password Cracking' || 
-     d.parent.name == 'Privilege Escalation' || d.parent.name == 'Web Hacking' ) {
-    $('html,body').animate({
-      scrollTop: $(".stepp").offset().top}, 'slow');
-        $(document).ready(function(){
-          //Qui si deve creare la roba nell'html
-          var div=$('div.stepp');
-          div.append('<md-card ng-init="selected = 0"><md-steppers  md-selected="selected" md-stretch-steppers="always">');
-          for(var i=0; i<d.children.length; i++) {
-            div.append('<md-step label="Lab'+i+'" md-complete="step'+i+'.completed"> <md-content> <iframe id="iframe'+i+'" name="myIframe'+i+'" frameborder="5" width="1500" height="1500"></iframe><md-button type="submit" class="md-raised md-primary" ng-click="selected = '+i+'; step'+i+'.completed=true">NEXT</md-button></md-content></md-step>');
-            lab=d.children[i].name;
-            $('#iframe'+i).attr('src', 'http://localhost:18181/lab/use/NS/'+lab);
-          }
-          div.append('<md-step label="Finish" md-complete="step3.completed"><md-content><h1>Finish</h1><md-button class="md-raised md-primary" ng-click="selected = 2">PREV</md-button></md-content></md-step></md-steppers></md-card>');
-        });
+      });
     }
 }
 
-*/
-
-/*
- var div=$('div.stepp');
-          div.append('<md-card ng-init="selected = 0"><md-steppers  md-selected="selected" md-stretch-steppers="always"><md-step label="Lab1" md-complete="step1.completed"><md-content><iframe id="iframe0" name="myIframe0" frameborder="5" width="1500" height="1500"></iframe><md-button type="submit" class="md-raised md-primary" ng-click="selected = 1; step1.completed=true">NEXT</md-button></md-content></md-step><md-step label="Lab2" md-complete="step2.completed"><md-content><iframe id="iframe1" name="myIframe1" frameborder="5" width="1500" height="1500"></iframe><md-button class="md-raised md-primary" ng-click="selected = 0">PREV</md-button><md-button class="md-raised md-primary" ng-click="selected = 2; step2.completed=true">NEXT</md-button></md-content></md-step><md-content><md-step label="Lab3" md-complete="step3.completed"><iframe id="iframe2" name="myIframe2" frameborder="5" width="1500" height="1500"></iframe><md-button class="md-raised md-primary" ng-click="selected = 1">PREV</md-button><md-button class="md-raised md-primary" ng-click="selected = 3; step3.completed=true">NEXT</md-button></md-content></md-step><md-step label="Finish" md-complete="step3.completed"><md-content><md-button class="md-raised md-primary" ng-click="selected = 2">PREV</md-button></md-content></md-step></md-steppers></md-card>');  
-*/
-
-/*
-            var stringa='<md-card ng-init="selected = 0">      <md-steppers  md-selected="selected" md-stretch-steppers="always">        <md-step label="Lab1" md-complete="step1.completed">          <md-content>            <iframe id="iframe0" name="myIframe0" frameborder="5" width="1500" height="1500"></iframe>            <md-button type="submit" class="md-raised md-primary" ng-click="selected = 1; step1.completed=true">NEXT</md-button>          </md-content>        </md-step>        <md-step label="Lab2" md-complete="step2.completed">          <md-content>            <iframe id="iframe1" name="myIframe1" frameborder="5" width="1500" height="1500"></iframe>            <md-button class="md-raised md-primary" ng-click="selected = 0">PREV</md-button>            <md-button class="md-raised md-primary" ng-click="selected = 2; step2.completed=true">NEXT</md-button>          </md-content>        </md-step>        <md-step label="Lab3" md-complete="step3.completed">          <md-content>            <iframe id="iframe2" name="myIframe2" frameborder="5" width="1500" height="1500"></iframe>            <md-button class="md-raised md-primary" ng-click="selected = 1">PREV</md-button>            <md-button class="md-raised md-primary" ng-click="selected = 3; step3.completed=true">NEXT</md-button>          </md-content>        </md-step>        <md-step label="Finish" md-complete="step3.completed">          <md-content>            <md-button class="md-raised md-primary" ng-click="selected = 2">PREV</md-button>          </md-content>        </md-step>      </md-steppers>    </md-card>';
-      document.getElementById("step").innerHTML += stringa;
-*/
+var dblclick = function (d) {
+  $('html,body').animate({
+    scrollTop: $(".stepp").offset().top}, 'slow');
+}
 
 }
 

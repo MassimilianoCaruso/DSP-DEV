@@ -312,7 +312,7 @@
       .controller('ManagedToolsCtrl', DSP_ManagedToolsCtrl)
       .controller('MonitorCtrl', DSP_MonitorCtrl)
       .controller("repoCtrl", dsp_RepoCtrl)
-      .controller("chartCtrl", dsp_chartCtrl)
+      .controller("treeCtrl", dsp_chartCtrl)
       .run(['$anchorScroll', function ($anchorScroll) {
         $anchorScroll.yOffset = 50;   // always scroll by 50 extra pixels
       }])
@@ -353,7 +353,7 @@
           })
           .when("/training", {
             templateUrl: "views/training.html",
-            controller: "chartCtrl as ctrl"
+            controller: "treeCtrl as ctrl"
           })
           .when("/lab/:action/:repo/:namelab", {
             templateUrl: "views/lab.html",
