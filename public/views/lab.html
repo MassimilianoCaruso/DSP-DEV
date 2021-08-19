@@ -22,7 +22,7 @@
   <script src="assets/mxgraph/use_utils.js"> </script>
   <script>
     $(document).ready(function () {
-      // Check if the lab is shown inside an iframe
+      // Remove header and side-bar when the lab is shown inside an iframe
       if (window.location !== window.parent.location) {
     document.getElementById('header').style.display = "none";
     document.getElementById('side-bar').style.display = "none";

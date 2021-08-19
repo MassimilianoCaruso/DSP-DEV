@@ -1,5 +1,6 @@
 <html>
 <head>
+
     <title>Training</title>
     <meta name="description">
     <meta charset="utf-8">
@@ -11,16 +12,6 @@
   <div id="graph"> <!-- View the graph-->
     <h1><i class="fa fa-book"></i> Training</h1>
     <p>&nbsp;</p>
-
-  <!-- 
-      <script type="text/javascript" src="assets/architecturetree/js/tree.js"></script>
-      Questo senza usare il controller. In questo caso bisogna levare il ctrl dall'index.html e levare
-      la funzione dsp_chartCtrl da tree.js
-    -->
-  
-   <!-- 
-     <ng-include src="'assets/architecturetree/js/angular.architectureTree/templates/filter.html'"></ng-include> 
-    -->
 
     <div class="filters panel panel-default">
       <div class="panel-heading">FILTER</div>
@@ -62,17 +53,7 @@
     </div>
   </div>
 
-
   <div ng-include="ctrl.numlab==2 && 'views/stepper-two-labs.html' || 'views/stepper-three-labs.html'"></div> 
-
-<!--
-
-  <div id="include1" ng-hide="ctrl.numlab==2" ng-include src="'views/stepper-three-labs.html'"></ng-include>
-  <div id="include2" ng-show="ctrl.numlab==2" ng-include src="'views/stepper-two-labs.html'"></ng-include>
-
-  -->
-
-
 
 </body>
 </html>

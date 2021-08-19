@@ -161,9 +161,6 @@ var update = function (source) {
     d.y0 = d.y;
   });
 
-  // return update;
-
-
 d3.selectAll("input[name=checkb]").on("change", function filterData() {
   function getCheckedBoxes(chkboxName) {
     var checkboxes = document.getElementsByName(chkboxName);
@@ -278,7 +275,7 @@ var collapse = function(d) {
 }
 
 
-// Double click to scroll down in the page up to the stepper that loads the labs of the selected training path
+// The stepper loads the labs of the selected training path
 var click = function (d){
   if(d.parent.name == 'Buffer Overflow' || d.parent.name == 'Password Cracking' || 
      d.parent.name == 'Privilege Escalation' || d.parent.name == 'Web Hacking' ) {
@@ -292,9 +289,10 @@ var click = function (d){
     }
 }
 
-var dblclick = function (d) {
+// Double click to scroll down in the page up to the stepper
+var dblclick = function () {
   $('html,body').animate({
-    scrollTop: $(".stepp").offset().top}, 'slow');
+    scrollTop: $(".step").offset().top}, 'slow');
 }
 
 }
