@@ -8,12 +8,26 @@
         { "name": "Buffer Overflow Medium",
           "labels": "Buffer Overflow",
           "difficulty": "Medium",
-          "dependsOn": [ "Buffer Overflow"]
+          "dependsOn": [ "Buffer Overflow"],
+          "children": [
+            { "name": "L10_FuzzingTraining",
+              "dependsOn": ["Buffer Overflow Medium"]
+            },
+            { "name": "L08_SSLHeartbleed",
+              "dependsOn": ["Buffer Overflow Medium"]}
+          ]
 	},
 	{       "name": "Buffer Overflow Advanced",
           "labels": "Buffer Overflow",
           "difficulty": "Advanced",
-          "dependsOn": [ "Buffer Overflow"]
+          "dependsOn": [ "Buffer Overflow"],
+          "children": [
+            { "name": "L10_FuzzingTraining",
+              "dependsOn": ["Buffer Overflow Advanced"]
+            },
+            { "name": "L10_BufferOverflow_1",
+              "dependsOn": ["Buffer Overflow Advanced"]}
+          ]
 	}
       ],
           "dependsOn": [ "HackingCourse"]},
@@ -64,6 +78,37 @@
 	}
       ],
           "dependsOn": [ "HackingCourse"]},
+          {
+            "name": "Denial of Service",
+            "labels": "Denial of Service",
+            "children": [
+              { "name": "DoS Medium",
+                "labels": "Denial of Service",
+                "difficulty": "Medium",
+                "dependsOn": [ "Denial of Service"],
+                "children": [
+                  { "name": "L04_ScanningAndEnumeration",
+                    "dependsOn": ["DoS Medium"]
+                  },
+                  { "name": "L14_SlowDoSAttack",
+                    "dependsOn": ["DoS Medium"]}
+                ]
+              },
+              { "name": "DoS Advanced",
+                "labels": "Denial of Service",
+                "difficulty": "Advanced" ,
+                "dependsOn": [ "Denial of Service"],
+                "children": [
+                  { "name": "L04_ScanningAndEnumeration",
+                    "dependsOn": ["DoS Advanced"]},
+                  { "name": "L03_DNSEnumeration",
+                    "dependsOn": ["DoS Advanced"]},
+                  { "name": "Mirai_Botnet",
+                    "dependsOn": ["DoS Advanced"]}
+                ]
+              }
+            ],
+                "dependsOn": [ "HackingCourse"]},
     {
       "name": "Password Cracking",
       "labels": "Password Cracking",
@@ -71,12 +116,26 @@
         { "name": "Password Cracking Beginner",
           "labels": "Password Cracking",
           "difficulty": "Beginner",
-          "dependsOn": [ "Password Cracking"]
+          "dependsOn": [ "Password Cracking"],
+          "children": [
+            { "name": "L04_NetcatTheAlmighty",
+              "dependsOn": ["Password Cracking Beginner"]
+            },
+            { "name": "Crack_WEP",
+              "dependsOn": ["Password Cracking Beginner"]}
+          ]
 	},
 	{       "name": "Password Cracking Medium",
           "labels": "Password Cracking",
           "difficulty": "Medium",
-          "dependsOn": [ "Password Cracking"]
+          "dependsOn": [ "Password Cracking"],
+          "children": [
+            { "name": "L04_ScanningAndEnumeration",
+              "dependsOn": ["Password Cracking Medium"]
+            },
+            { "name": "L07_IPSecCrack",
+              "dependsOn": ["Password Cracking Medium"]}
+          ]
 	}
       ],
           "dependsOn": [ "HackingCourse"]}]

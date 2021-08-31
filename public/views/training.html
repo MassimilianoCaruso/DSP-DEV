@@ -23,6 +23,9 @@
              <input style="padding-top: 10px;" type="checkbox" name="checkb" value="Buffer Overflow"> <span class="slider round"></span></label>&nbsp&nbsp <span style="vertical-align: 3px;" > Buffer Overflow </span>
              <br />
              <label class="switch">
+              <input style="padding-top: 10px;" type="checkbox" name="checkb" value="Denial of Service"> <span class="slider round"></span></label>&nbsp&nbsp <span style="vertical-align: 3px;" > Denial of Service</span>
+              <br />
+             <label class="switch">
              <input style="padding-top: 10px;" type="checkbox" name="checkb" value="Password Cracking"> <span class="slider round"></span></label>&nbsp&nbsp <span style="vertical-align: 3px;" > Password Cracking </span>
              <br />
              <label class="switch">
@@ -53,7 +56,7 @@
     </div>
   </div>
 
-  <div ng-include="ctrl.numlab==2 && 'views/stepper-two-labs.html' || 'views/stepper-three-labs.html'"></div> 
+<div id="stepp" ng-include="ctrl.numlab==2 && 'views/stepper-two-labs.html' || 'views/stepper-three-labs.html'"></div>
 
 </body>
 </html>

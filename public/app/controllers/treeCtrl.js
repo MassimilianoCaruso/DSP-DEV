@@ -4,7 +4,7 @@ var vm = this;
 
 var diameter = 960;
 
-var margin = {top: 450, right: 500, bottom: 10, left: 600},
+var margin = {top: 700, right: 500, bottom: 10, left: 600}, // Graph position in the page
     width = diameter,
     height = diameter;
     
@@ -80,6 +80,7 @@ var update = function (source) {
       .on("click", click)
       .on("dblclick", dblclick)
       .on('mouseover', function(d) {
+      //d.name = [...new Set(d.name)]; // Remove duplicates
       //var checkBox = 'input[type="checkbox"]'; // The fade only works if all boxes are checked
       //if ($(checkBox+':checked').length == $(checkBox).length) {
         fade(0.1)(d)
@@ -238,8 +239,14 @@ var getDetailCascade = function (nodeEnter, detailName) {
       return values;
   };
 
+  //var remDup = function (nodeEnter) {
+  //  nodeEnter.name = [...new Set(nodeEnter.name)]; // Remove duplicates
+  //  return false;
+  //}
+
 var fade = function (opacity) {
     return function(nodeEnter) {
+    //remDup(nodeEnter);
     d3.selectAll(".node")
       .filter(function(d) {
           if (d.name === nodeEnter.name) return false;
@@ -274,23 +281,21 @@ var collapse = function(d) {
     }
 }
 
-
 // The stepper loads the labs of the selected training path
 var click = function (d){
-  if(d.parent.name == 'Buffer Overflow' || d.parent.name == 'Password Cracking' || 
+  if(d.parent.name == 'Buffer Overflow' || d.parent.name == 'Password Cracking' || d.parent.name == 'Denial of Service' ||
      d.parent.name == 'Privilege Escalation' || d.parent.name == 'Web Hacking' ) {
        vm.numlab=d.children.length;
-          $(document).ready(function(){
-          for(var i=0; i<d.children.length; i++) {
-            var lab=d.children[i].name;
-            $('#iframe'+i).attr('src', 'http://localhost:18181/lab/use/NS/'+lab);
-          }
-      });
+        for(var i=0; i< d.children.length; i++) {
+          var lab=d.children[i].name;
+          $('#iframe'+i).attr('src', 'http://localhost:18181/lab/use/NS/'+lab);
+      }
     }
 }
 
 // Double click to scroll down in the page up to the stepper
-var dblclick = function () {
+var dblclick = function (d) {
+  document.getElementById("doneButton").click(); // Go to the first step
   $('html,body').animate({
     scrollTop: $(".step").offset().top}, 'slow');
 }
