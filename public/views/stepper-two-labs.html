@@ -23,7 +23,8 @@
             <h5> </br> You have completed this training path. </br> You can go back through the labs or select another training.
             </h5>
             <md-button class="md-raised md-primary" ng-click="selected = 1">PREV</md-button>
-            <md-button id="doneButton" class="md-raised md-primary" ng-click="step2.disabled = true; step3.disabled = true; selected = 0">DONE</md-button>
+            <md-button id="doneButton" class="md-raised md-primary" ng-click="step2.disabled = true; step3.disabled = true;
+             step1.completed=false; step2.completed=false; step3.completed=false; selected = 0">DONE</md-button>
           </md-content>
         </md-step>
       </md-steppers>

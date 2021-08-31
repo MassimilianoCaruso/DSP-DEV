@@ -162,6 +162,7 @@ var update = function (source) {
     d.y0 = d.y;
   });
 
+  // Checkbox
 d3.selectAll("input[name=checkb]").on("change", function filterData() {
   function getCheckedBoxes(chkboxName) {
     var checkboxes = document.getElementsByName(chkboxName);
@@ -239,14 +240,11 @@ var getDetailCascade = function (nodeEnter, detailName) {
       return values;
   };
 
-  //var remDup = function (nodeEnter) {
-  //  nodeEnter.name = [...new Set(nodeEnter.name)]; // Remove duplicates
-  //  return false;
-  //}
-
 var fade = function (opacity) {
     return function(nodeEnter) {
-    //remDup(nodeEnter);
+    if(!nodeEnter.children && nodeEnter.parent) {
+      nodeEnter.name = [...new Set(nodeEnter.name)]; // Remove duplicates
+    }
     d3.selectAll(".node")
       .filter(function(d) {
           if (d.name === nodeEnter.name) return false;
