@@ -4,7 +4,7 @@ var vm = this;
 
 var diameter = 960;
 
-var margin = {top: 700, right: 500, bottom: 10, left: 600}, // Graph position in the page
+var margin = {top: 700, right: 500, bottom: 10, left: 650}, // Graph position in the page
     width = diameter,
     height = diameter;
     
@@ -60,7 +60,13 @@ var update = function (source) {
       links = tree.links(nodes);
 
   // Normalize for fixed-depth
-  nodes.forEach(function(d) { d.y = d.depth * 150; }); //Link length (150)
+  nodes.forEach(function(d) { 
+    if (!d.children && d.name.length > 25) {
+      d.y = d.depth * 160; //Link length (170)
+      } else {
+        d.y = d.depth * 140;
+      }
+    });
 
   // Add nodes dependencies
   addDependents(nodes);
@@ -80,7 +86,6 @@ var update = function (source) {
       .on("click", click)
       .on("dblclick", dblclick)
       .on('mouseover', function(d) {
-      //d.name = [...new Set(d.name)]; // Remove duplicates
       //var checkBox = 'input[type="checkbox"]'; // The fade only works if all boxes are checked
       //if ($(checkBox+':checked').length == $(checkBox).length) {
         fade(0.1)(d)
@@ -98,7 +103,11 @@ var update = function (source) {
       .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
 
   nodeEnter.append("text")
-            .attr("x", function(d) { return d.x < 180 ? "10" : "65"; })
+            .attr("x", function(d) { // Distance between circle and node name
+              if (d.name.length <= 10) return d.x < 180 ? "10" : "45"; 
+              else if (d.name.length > 10 && d.name.length < 15) return d.x < 180 ? "10" : "50";  
+              else return d.x < 180 ? "10" : "65"; 
+            }) 
             .attr("dy", ".31em")
             .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
             .attr("transform", function(d) { return d.x < 180 ? "translate(8)" : "rotate(180)translate(-8)"; })
@@ -177,7 +186,7 @@ d3.selectAll("input[name=checkb]").on("change", function filterData() {
   
     var checkedBoxes = getCheckedBoxes("checkb");
       
-    node.style("font-weight", "bolder");
+    node.style("font-weight", "normal");
     node.style("fill", "rgb(0, 162, 255)");
     link.style("opacity", "1");
 

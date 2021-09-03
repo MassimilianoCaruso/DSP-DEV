@@ -62,20 +62,57 @@
 	      }
       ],
           "dependsOn": [ "HackingCourse"]},
-    {
-      "name": "Privilege Escalation",
-      "labels": "Privilege Escalation",
-      "children": [
-        { "name": "Privilege Escalation Advanced",
-          "labels": "Privilege Escalation",
-          "difficulty": "Advanced",
-          "dependsOn": [ "Privilege Escalation"]
+          {
+            "name": "Privilege Escalation",
+            "labels": "Privilege Escalation",
+            "children": [
+              { "name": "Privilege Escalation Medium",
+                "labels": "Privilege Escalation",
+                "difficulty": "Medium",
+                "dependsOn": [ "Privilege Escalation"],
+                "children": [
+                  { "name": "L04_TFTPain",
+                    "dependsOn": ["Privilege Escalation Medium"]
+                  },
+                  { "name": "L08_SSHRemotePortForwarding",
+                    "dependsOn": ["Privilege Escalation Medium"]
+                  },
+                  { "name": "L_EXTRA_PrivilegeEscalation_PATH",
+                    "dependsOn": ["Privilege Escalation Medium"]}
+                ]
         },
-	{       "name": "Privilege Escalation Expert",
-          "labels": "Privilege Escalation",
-          "difficulty": "Expert",
-          "dependsOn": [ "Privilege Escalation"]
-	}
+          {      
+            "name": "Privilege Escalation Advanced",
+            "labels": "Privilege Escalation",
+            "difficulty": "Advanced",
+            "dependsOn": [ "Privilege Escalation"],
+            "children": [
+              { "name": "L04_ScanningAndEnumeration",
+                "dependsOn": ["Privilege Escalation Advanced"]
+              },
+              { "name": "L08_SSHRemotePortForwarding",
+                "dependsOn": ["Privilege Escalation Advanced"]
+              },
+              { "name": "L_EXTRA_PrivilegeEscalation_cronjobs",
+                "dependsOn": ["Privilege Escalation Advanced"]}
+              ]
+          },
+          {      
+            "name": "Privilege Escalation Expert",
+            "labels": "Privilege Escalation",
+            "difficulty": "Expert",
+            "dependsOn": [ "Privilege Escalation"],
+            "children": [
+              { "name": "L04_ScanningAndEnumeration",
+                "dependsOn": ["Privilege Escalation Expert"]
+              },
+              { "name": "L08_SSHRemotePortForwarding",
+                "dependsOn": ["Privilege Escalation Expert"]
+              },
+              { "name": "L_EXTRA_PrivilegeEscalation_suid_binaries",
+                "dependsOn": ["Privilege Escalation Advanced"]}
+              ]
+          }
       ],
           "dependsOn": [ "HackingCourse"]},
           {
@@ -138,5 +175,6 @@
           ]
 	}
       ],
-          "dependsOn": [ "HackingCourse"]}]
+          "dependsOn": [ "HackingCourse"]}
+    ]
 }
