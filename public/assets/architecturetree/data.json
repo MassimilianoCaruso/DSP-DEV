@@ -1,31 +1,44 @@
 {
   "name": "HackingCourse",
+  "labels": ["Buffer Overflow", "Web Hacking", "Privilege Escalation", "Denial of Service", "Password Cracking"],
+  "photo": "assets/img/dsp_logo_transparent.png",
   "children": [
     {
       "name": "Buffer Overflow",
       "labels": "Buffer Overflow",
+      "color": "rgb(237, 17, 17)",
       "children": [
         { "name": "Buffer Overflow Medium",
           "labels": "Buffer Overflow",
+          "color": "rgb(237, 17, 17)",
           "difficulty": "Medium",
           "dependsOn": [ "Buffer Overflow"],
           "children": [
             { "name": "L10_FuzzingTraining",
+              "labels": "Buffer Overflow",
+              "difficulty": "Medium",
               "dependsOn": ["Buffer Overflow Medium"]
             },
             { "name": "L08_SSLHeartbleed",
+              "labels": "Buffer Overflow",
+              "difficulty": "Medium",
               "dependsOn": ["Buffer Overflow Medium"]}
           ]
 	},
 	{       "name": "Buffer Overflow Advanced",
           "labels": "Buffer Overflow",
+          "color": "rgb(237, 17, 17)",
           "difficulty": "Advanced",
           "dependsOn": [ "Buffer Overflow"],
           "children": [
             { "name": "L10_FuzzingTraining",
+              "labels": "Buffer Overflow",
+              "difficulty": "Advanced",
               "dependsOn": ["Buffer Overflow Advanced"]
             },
             { "name": "L10_BufferOverflow_1",
+              "labels": "Buffer Overflow",
+              "difficulty": "Advanced",
               "dependsOn": ["Buffer Overflow Advanced"]}
           ]
 	}
@@ -34,29 +47,42 @@
     {
       "name": "Web Hacking",
       "labels": "Web Hacking",
+      "color": "rgb(24, 172, 61)",
       "children": [
         { "name": "Web Hacking Expert",
           "labels": "Web Hacking",
+          "color": "rgb(24, 172, 61)",
           "difficulty": "Expert",
           "dependsOn": [ "Web Hacking"],
           "children": [
             { "name": "L04_ScanningAndEnumeration",
+              "labels": "Web Hacking",
+              "difficulty": "Expert",
               "dependsOn": ["Web Hacking Expert"]
             },
             { "name": "L_EXTRA_Remote_Code_Execution",
+              "labels": "Web Hacking",
+              "difficulty": "Expert",
               "dependsOn": ["Web Hacking Expert"]}
           ]
 	      },
         { "name": "Web Hacking Medium",
           "labels": "Web Hacking",
-          "difficulty": "Medium" ,
+          "color": "rgb(24, 172, 61)",
+          "difficulty": "Medium",
           "dependsOn": [ "Web Hacking"],
           "children": [
             { "name": "L04_TFTPain",
+              "labels": "Web Hacking",
+              "difficulty": "Medium",
               "dependsOn": ["Web Hacking Medium"]},
             { "name": "L04_SMTPEnumeration",
+              "labels": "Web Hacking",
+              "difficulty": "Medium",
               "dependsOn": ["Web Hacking Medium"]},
             { "name": "SerializeJavascript",
+              "labels": "Web Hacking",
+              "difficulty": "Medium",
               "dependsOn": ["Web Hacking Medium"]}
           ]
 	      }
@@ -65,52 +91,74 @@
           {
             "name": "Privilege Escalation",
             "labels": "Privilege Escalation",
+            "color": "rgb(0, 0, 255)",
             "children": [
               { "name": "Privilege Escalation Medium",
                 "labels": "Privilege Escalation",
+                "color": "rgb(0, 0, 255)",
                 "difficulty": "Medium",
                 "dependsOn": [ "Privilege Escalation"],
                 "children": [
                   { "name": "L04_TFTPain",
+                    "labels": "Privilege Escalation",
+                    "difficulty": "Medium",
                     "dependsOn": ["Privilege Escalation Medium"]
                   },
                   { "name": "L08_SSHRemotePortForwarding",
+                    "labels": "Privilege Escalation",
+                    "difficulty": "Medium",
                     "dependsOn": ["Privilege Escalation Medium"]
                   },
                   { "name": "L_EXTRA_PrivilegeEscalation_PATH",
+                    "labels": "Privilege Escalation",
+                    "difficulty": "Medium",
                     "dependsOn": ["Privilege Escalation Medium"]}
                 ]
         },
           {      
             "name": "Privilege Escalation Advanced",
             "labels": "Privilege Escalation",
+            "color": "rgb(0, 0, 255)",
             "difficulty": "Advanced",
             "dependsOn": [ "Privilege Escalation"],
             "children": [
               { "name": "L04_ScanningAndEnumeration",
+                "labels": "Privilege Escalation",
+                "difficulty": "Advanced",
                 "dependsOn": ["Privilege Escalation Advanced"]
               },
               { "name": "L08_SSHRemotePortForwarding",
+                "labels": "Privilege Escalation",
+                "difficulty": "Advanced",
                 "dependsOn": ["Privilege Escalation Advanced"]
               },
               { "name": "L_EXTRA_PrivilegeEscalation_cronjobs",
+                "labels": "Privilege Escalation",
+                "difficulty": "Advanced",
                 "dependsOn": ["Privilege Escalation Advanced"]}
               ]
           },
           {      
             "name": "Privilege Escalation Expert",
             "labels": "Privilege Escalation",
+            "color": "rgb(0, 0, 255)",
             "difficulty": "Expert",
             "dependsOn": [ "Privilege Escalation"],
             "children": [
               { "name": "L04_ScanningAndEnumeration",
+                "labels": "Privilege Escalation",
+                "difficulty": "Expert",
                 "dependsOn": ["Privilege Escalation Expert"]
               },
               { "name": "L08_SSHRemotePortForwarding",
+                "labels": "Privilege Escalation",
+                "difficulty": "Expert",
                 "dependsOn": ["Privilege Escalation Expert"]
               },
               { "name": "L_EXTRA_PrivilegeEscalation_suid_binaries",
-                "dependsOn": ["Privilege Escalation Advanced"]}
+                "labels": "Privilege Escalation",
+                "difficulty": "Expert",
+                "dependsOn": ["Privilege Escalation Expert"]}
               ]
           }
       ],
@@ -118,30 +166,43 @@
           {
             "name": "Denial of Service",
             "labels": "Denial of Service",
+            "color": "rgb(255,165,0)",
             "children": [
-              { "name": "DoS Medium",
+              { "name": "Denial of Service Medium",
                 "labels": "Denial of Service",
+                "color": "rgb(255,165,0)",
                 "difficulty": "Medium",
                 "dependsOn": [ "Denial of Service"],
                 "children": [
                   { "name": "L04_ScanningAndEnumeration",
-                    "dependsOn": ["DoS Medium"]
+                    "labels": "Denial of Service",
+                    "difficulty": "Medium",
+                    "dependsOn": ["Denial of Service Medium"]
                   },
                   { "name": "L14_SlowDoSAttack",
-                    "dependsOn": ["DoS Medium"]}
+                    "labels": "Denial of Service",
+                    "difficulty": "Medium",
+                    "dependsOn": ["Denial of ServiceMedium"]}
                 ]
               },
-              { "name": "DoS Advanced",
+              { "name": "Denial of Service Advanced",
                 "labels": "Denial of Service",
-                "difficulty": "Advanced" ,
+                "color": "rgb(255,165,0)",
+                "difficulty": "Advanced",
                 "dependsOn": [ "Denial of Service"],
                 "children": [
                   { "name": "L04_ScanningAndEnumeration",
-                    "dependsOn": ["DoS Advanced"]},
+                    "labels": "Denial of Service",
+                    "difficulty": "Advanced",
+                    "dependsOn": ["Denial of Service Advanced"]},
                   { "name": "L03_DNSEnumeration",
-                    "dependsOn": ["DoS Advanced"]},
+                    "labels": "Denial of Service",
+                    "difficulty": "Advanced",
+                    "dependsOn": ["Denial of Service Advanced"]},
                   { "name": "Mirai_Botnet",
-                    "dependsOn": ["DoS Advanced"]}
+                    "labels": "Denial of Service",
+                    "difficulty": "Advanced",
+                    "dependsOn": ["Denial of Service Advanced"]}
                 ]
               }
             ],
@@ -149,28 +210,39 @@
     {
       "name": "Password Cracking",
       "labels": "Password Cracking",
+      "color": "rgb(128,0,128)",
       "children": [
         { "name": "Password Cracking Beginner",
           "labels": "Password Cracking",
+          "color": "rgb(128,0,128)",
           "difficulty": "Beginner",
           "dependsOn": [ "Password Cracking"],
           "children": [
             { "name": "L04_NetcatTheAlmighty",
+              "labels": "Password Cracking",
+              "difficulty": "Beginner",
               "dependsOn": ["Password Cracking Beginner"]
             },
             { "name": "Crack_WEP",
+              "labels": "Password Cracking",
+              "difficulty": "Beginner",
               "dependsOn": ["Password Cracking Beginner"]}
           ]
 	},
 	{       "name": "Password Cracking Medium",
           "labels": "Password Cracking",
+          "color": "rgb(128,0,128)",
           "difficulty": "Medium",
           "dependsOn": [ "Password Cracking"],
           "children": [
             { "name": "L04_ScanningAndEnumeration",
+              "labels": "Password Cracking",
+              "difficulty": "Medium",
               "dependsOn": ["Password Cracking Medium"]
             },
             { "name": "L07_IPSecCrack",
+              "labels": "Password Cracking",
+              "difficulty": "Medium",
               "dependsOn": ["Password Cracking Medium"]}
           ]
 	}

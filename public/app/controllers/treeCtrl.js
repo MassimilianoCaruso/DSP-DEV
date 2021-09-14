@@ -4,7 +4,7 @@ var vm = this;
 
 var diameter = 960;
 
-var margin = {top: 700, right: 500, bottom: 10, left: 650}, // Graph position in the page
+var margin = {top: 700, right: 500, bottom: 10, left: 670}, // Graph position in the page
     width = diameter,
     height = diameter;
     
@@ -61,17 +61,11 @@ var update = function (source) {
 
   // Normalize for fixed-depth
   nodes.forEach(function(d) { 
-    if (!d.children && d.name.length > 25) {
-      d.y = d.depth * 160; //Link length (170)
+    if (!d.children && d.name.length > 15) {
+      d.y = d.depth * 160; //Link length (160)
       } else {
         d.y = d.depth * 140;
       }
-    });
-
-  // Add nodes dependencies
-  addDependents(nodes);
-  nodes.map(function(nodeEnter) {
-    addIndex(nodeEnter);
     });
 
   // Update the nodes
@@ -85,19 +79,43 @@ var update = function (source) {
       .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
       .on("click", click)
       .on("dblclick", dblclick)
-      .on('mouseover', function(d) {
+      .on("mouseover", function(d) {
+        if(d.parent != root) {
+          d3.select(this).style("text-decoration","underline");
+       }
+      })
+      .on("mouseout", function(d) {
+        d3.select(this).style("text-decoration","none");
+      });
+      //.on('mouseover', function(d) {
       //var checkBox = 'input[type="checkbox"]'; // The fade only works if all boxes are checked
       //if ($(checkBox+':checked').length == $(checkBox).length) {
-        fade(0.1)(d)
+      //fade(0.1)(d)
       //}
-      })
-      .on('mouseout', function(d) {
+      //)
+      //.on('mouseout', function(d) {
       //var checkBox = 'input[type="checkbox"]'; // The fade only works if all boxes are checked
       //if ($(checkBox+':checked').length == $(checkBox).length) {
-        fade(1)(d);
+      //fade(1)(d);
       //}
-      })
-   
+      //})
+
+  // Add picture to root node
+  nodeEnter.append('image')
+      .attr('xlink:href',function(d){ 
+        if (d.name=="HackingCourse") return d.photo;
+        })
+      .attr('height',function(d){ 
+        if (d.name=="HackingCourse") return 220 })
+      .attr('width',function(d){ 
+        if (d.name=="HackingCourse") return 220 })
+      .attr('transform', function(d){ 
+        if (d.name=="HackingCourse") return 'rotate(270 0 0)'})
+      .attr('x',function(d){ 
+        if (d.name=="HackingCourse") return -108 })
+      .attr('y',function(d){ 
+        if (d.name=="HackingCourse") return -85 });
+    
   nodeEnter.append("circle")
       .attr("r", 1e-6)
       .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
@@ -111,8 +129,16 @@ var update = function (source) {
             .attr("dy", ".31em")
             .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
             .attr("transform", function(d) { return d.x < 180 ? "translate(8)" : "rotate(180)translate(-8)"; })
+            .style("font-size", function(d) {
+              if (d.name=="Buffer Overflow" || d.name=="Web Hacking" || d.name=="Privilege Escalation" || 
+              d.name=="Denial of Service" || d.name=="Password Cracking") {
+                d.y = d.depth * 115;
+                return "16px";
+              }
+            })
+            .style("fill", function (d) { return d.color;})
             .text(function(d) {
-                return d.name;
+              if (d.name!="HackingCourse") return d.name;
             });
 
   // Transition nodes to their new position
@@ -185,84 +211,24 @@ d3.selectAll("input[name=checkb]").on("change", function filterData() {
   }
   
     var checkedBoxes = getCheckedBoxes("checkb");
-      
-    node.style("font-weight", "normal");
-    node.style("fill", "rgb(0, 162, 255)");
-    link.style("opacity", "1");
-
-      
-    node.filter(function(d) {
-       return checkedBoxes.indexOf(d.difficulty) === -1 && checkedBoxes.indexOf(d.name) === -1;
-      })
-      .style("font-weight", "normal")
-      .style("fill", "black");
-
-     nodeEnter.filter(function(d) {
-      return checkedBoxes.indexOf(d.labels) === -1;
-       })
-       .style("font-weight", "normal")
-       .style("fill", "black");
+    var isChecked = document.querySelectorAll('input:checked');
     
-    });
+    node.style("opacity", "1");
 
-}
+    node.filter(function(d){
+      return checkedBoxes.indexOf(d.difficulty) === -1 && checkedBoxes.indexOf(d.name) === -1;
+      })
+    .style('opacity',function(d){ 
+        if (d.name!=="HackingCourse" && isChecked.length!=0) return 0.1 })
 
-var addDependents = function(nodes) {
-    var dependents = [];
-    nodes.forEach(function(nodeEnter) {
-        if (nodeEnter.dependsOn) {
-            nodeEnter.dependsOn.forEach(function(dependsOn) {
-                if (!dependents[dependsOn]) {
-                    dependents[dependsOn] = [];
-                }
-                dependents[dependsOn].push(nodeEnter.name);
-            });
-        }
-     });
-    nodes.forEach(function(nodeEnter, index) {
-        if (dependents[nodeEnter.name]) {
-           nodes[index].dependents = dependents[nodeEnter.name];
-         }
-     });
-  };   
-
-var addIndex = function (nodeEnter) {
-    nodeEnter.index = {
-        relatedNodes: []
-        };
-    var dependsOn = getDetailCascade(nodeEnter, 'dependsOn');
-      if (dependsOn.length > 0) {
-        nodeEnter.index.relatedNodes = nodeEnter.index.relatedNodes.concat(dependsOn);
-      }
- };
-
-var getDetailCascade = function (nodeEnter, detailName) {
-    var values = [];
-      if (nodeEnter[detailName]) {
-          nodeEnter[detailName].forEach(function(value) {
-              values.push(value);
-          });
-       }
-      if (nodeEnter.parent) {
-          values = values.concat(getDetailCascade(nodeEnter.parent, detailName));
-       }
-      return values;
-  };
-
-var fade = function (opacity) {
-    return function(nodeEnter) {
-    if(!nodeEnter.children && nodeEnter.parent) {
-      nodeEnter.name = [...new Set(nodeEnter.name)]; // Remove duplicates
-    }
-    d3.selectAll(".node")
-      .filter(function(d) {
-          if (d.name === nodeEnter.name) return false;
-            return nodeEnter.index.relatedNodes.indexOf(d.name) === -1;
-          })
-      .transition()
-      .style("opacity", opacity);
-     };
-};   
+    nodeEnter.filter(function(d) {
+        return checkedBoxes.indexOf(d.labels) === -1;
+       })
+       .style('opacity',function(d){ 
+        if (d.name!=="HackingCourse" && isChecked.length!=0) return 0.1 })
+    }); 
+    
+}   
 
 // Toggle children on click
 /*
@@ -288,11 +254,12 @@ var collapse = function(d) {
     }
 }
 
+
 // The stepper loads the labs of the selected training path
 var click = function (d){
   if(d.parent.name == 'Buffer Overflow' || d.parent.name == 'Password Cracking' || d.parent.name == 'Denial of Service' ||
      d.parent.name == 'Privilege Escalation' || d.parent.name == 'Web Hacking' ) {
-       vm.numlab=d.children.length;
+        vm.numlab=d.children.length;
         for(var i=0; i< d.children.length; i++) {
           var lab=d.children[i].name;
           $('#iframe'+i).attr('src', 'http://localhost:18181/lab/use/NS/'+lab);
@@ -302,10 +269,14 @@ var click = function (d){
 
 // Double click to scroll down in the page up to the stepper
 var dblclick = function (d) {
-  document.getElementById("doneButton").click(); // Go to the first step
-  $('html,body').animate({
-    scrollTop: $(".step").offset().top}, 'slow');
-}
-
+  if (d.parent && !d.children) {
+    window.open('http://localhost:18181/lab/use/NS/'+d.name, '_blank');
+  } else if(d.parent.name == 'Buffer Overflow' || d.parent.name == 'Password Cracking' || d.parent.name == 'Denial of Service' ||
+    d.parent.name == 'Privilege Escalation' || d.parent.name == 'Web Hacking' ) {
+    document.getElementById("doneButton").click(); // Go to the first step
+    $('html,body').animate({
+      scrollTop: $(".step").offset().top}, 'slow');
+    }
+  }
 }
 
