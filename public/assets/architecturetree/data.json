@@ -6,12 +6,12 @@
     {
       "name": "Buffer Overflow",
       "labels": "Buffer Overflow",
-      "color": "rgb(237, 17, 17)",
+      "kinshipDegree": "firstChild",
       "children": [
         { "name": "Buffer Overflow Medium",
           "labels": "Buffer Overflow",
-          "color": "rgb(237, 17, 17)",
-          "difficulty": "Medium",
+          "kinshipDegree": "secondChild",
+          "color": "orange",
           "dependsOn": [ "Buffer Overflow"],
           "children": [
             { "name": "L10_FuzzingTraining",
@@ -27,7 +27,8 @@
 	},
 	{       "name": "Buffer Overflow Advanced",
           "labels": "Buffer Overflow",
-          "color": "rgb(237, 17, 17)",
+          "kinshipDegree": "secondChild",
+          "color": "red",
           "difficulty": "Advanced",
           "dependsOn": [ "Buffer Overflow"],
           "children": [
@@ -47,11 +48,12 @@
     {
       "name": "Web Hacking",
       "labels": "Web Hacking",
-      "color": "rgb(24, 172, 61)",
+      "kinshipDegree": "firstChild",
       "children": [
         { "name": "Web Hacking Expert",
           "labels": "Web Hacking",
-          "color": "rgb(24, 172, 61)",
+          "kinshipDegree": "secondChild",
+          "color": "purple",
           "difficulty": "Expert",
           "dependsOn": [ "Web Hacking"],
           "children": [
@@ -68,7 +70,8 @@
 	      },
         { "name": "Web Hacking Medium",
           "labels": "Web Hacking",
-          "color": "rgb(24, 172, 61)",
+          "kinshipDegree": "secondChild",
+          "color": "orange",
           "difficulty": "Medium",
           "dependsOn": [ "Web Hacking"],
           "children": [
@@ -91,11 +94,12 @@
           {
             "name": "Privilege Escalation",
             "labels": "Privilege Escalation",
-            "color": "rgb(0, 0, 255)",
+            "kinshipDegree": "firstChild",
             "children": [
               { "name": "Privilege Escalation Medium",
                 "labels": "Privilege Escalation",
-                "color": "rgb(0, 0, 255)",
+                "kinshipDegree": "secondChild",
+                "color": "orange",
                 "difficulty": "Medium",
                 "dependsOn": [ "Privilege Escalation"],
                 "children": [
@@ -118,7 +122,8 @@
           {      
             "name": "Privilege Escalation Advanced",
             "labels": "Privilege Escalation",
-            "color": "rgb(0, 0, 255)",
+            "kinshipDegree": "secondChild",
+            "color": "red",
             "difficulty": "Advanced",
             "dependsOn": [ "Privilege Escalation"],
             "children": [
@@ -141,7 +146,8 @@
           {      
             "name": "Privilege Escalation Expert",
             "labels": "Privilege Escalation",
-            "color": "rgb(0, 0, 255)",
+            "kinshipDegree": "secondChild",
+            "color": "purple",
             "difficulty": "Expert",
             "dependsOn": [ "Privilege Escalation"],
             "children": [
@@ -166,11 +172,12 @@
           {
             "name": "Denial of Service",
             "labels": "Denial of Service",
-            "color": "rgb(255,165,0)",
+            "kinshipDegree": "firstChild",
             "children": [
               { "name": "Denial of Service Medium",
                 "labels": "Denial of Service",
-                "color": "rgb(255,165,0)",
+                "kinshipDegree": "secondChild",
+                "color": "orange",
                 "difficulty": "Medium",
                 "dependsOn": [ "Denial of Service"],
                 "children": [
@@ -187,7 +194,8 @@
               },
               { "name": "Denial of Service Advanced",
                 "labels": "Denial of Service",
-                "color": "rgb(255,165,0)",
+                "kinshipDegree": "secondChild",
+                "color": "red",
                 "difficulty": "Advanced",
                 "dependsOn": [ "Denial of Service"],
                 "children": [
@@ -210,11 +218,12 @@
     {
       "name": "Password Cracking",
       "labels": "Password Cracking",
-      "color": "rgb(128,0,128)",
+      "kinshipDegree": "firstChild",
       "children": [
         { "name": "Password Cracking Beginner",
           "labels": "Password Cracking",
-          "color": "rgb(128,0,128)",
+          "kinshipDegree": "secondChild",
+          "color": "green",
           "difficulty": "Beginner",
           "dependsOn": [ "Password Cracking"],
           "children": [
@@ -231,7 +240,8 @@
 	},
 	{       "name": "Password Cracking Medium",
           "labels": "Password Cracking",
-          "color": "rgb(128,0,128)",
+          "kinshipDegree": "secondChild",
+          "color": "orange",
           "difficulty": "Medium",
           "dependsOn": [ "Password Cracking"],
           "children": [

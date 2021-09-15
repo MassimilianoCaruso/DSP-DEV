@@ -1,4 +1,11 @@
-var dsp_chartCtrl = function ($scope) {
+var dsp_chartCtrl = function ($scope, AjaxService, Notification) {
+
+var repo = AjaxService.config;
+if(!repo){
+  Notification('Server error: user repo doesn\'t exist. The learning paths can\'t be carried out.','error');
+}
+
+var url = 'http://' + location.host + '/';
 
 var vm = this;
 
@@ -130,8 +137,7 @@ var update = function (source) {
             .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
             .attr("transform", function(d) { return d.x < 180 ? "translate(8)" : "rotate(180)translate(-8)"; })
             .style("font-size", function(d) {
-              if (d.name=="Buffer Overflow" || d.name=="Web Hacking" || d.name=="Privilege Escalation" || 
-              d.name=="Denial of Service" || d.name=="Password Cracking") {
+              if (d.kinshipDegree=="firstChild") {
                 d.y = d.depth * 115;
                 return "16px";
               }
@@ -257,26 +263,24 @@ var collapse = function(d) {
 
 // The stepper loads the labs of the selected training path
 var click = function (d){
-  if(d.parent.name == 'Buffer Overflow' || d.parent.name == 'Password Cracking' || d.parent.name == 'Denial of Service' ||
-     d.parent.name == 'Privilege Escalation' || d.parent.name == 'Web Hacking' ) {
+  if (d.parent && !d.children) {
+    window.open(url+'lab/use/NS/'+d.name, '_blank');
+  } else if(d.kinshipDegree=="secondChild") {
         vm.numlab=d.children.length;
         for(var i=0; i< d.children.length; i++) {
           var lab=d.children[i].name;
-          $('#iframe'+i).attr('src', 'http://localhost:18181/lab/use/NS/'+lab);
+          $('#iframe'+i).attr('src', url+'lab/use/'+repo.name+'/'+lab); //AL POSTO DI NS METTERE IL PERCORSO DI CONFIG_USER
+          ///lab/:action/:repo/
       }
     }
 }
 
 // Double click to scroll down in the page up to the stepper
 var dblclick = function (d) {
-  if (d.parent && !d.children) {
-    window.open('http://localhost:18181/lab/use/NS/'+d.name, '_blank');
-  } else if(d.parent.name == 'Buffer Overflow' || d.parent.name == 'Password Cracking' || d.parent.name == 'Denial of Service' ||
-    d.parent.name == 'Privilege Escalation' || d.parent.name == 'Web Hacking' ) {
+  if(d.color) {
     document.getElementById("doneButton").click(); // Go to the first step
     $('html,body').animate({
       scrollTop: $(".step").offset().top}, 'slow');
     }
   }
 }
-
