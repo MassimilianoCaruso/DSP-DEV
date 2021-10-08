@@ -1,6 +1,5 @@
 {
   "name": "HackingCourse",
-  "labels": ["Buffer Overflow", "Web Hacking", "Privilege Escalation", "Denial of Service", "Password Cracking"],
   "photo": "assets/img/dsp_logo_transparent.png",
   "children": [
     {
@@ -12,6 +11,7 @@
           "labels": "Buffer Overflow",
           "kinshipDegree": "secondChild",
           "color": "orange",
+          "difficulty": "Medium",
           "dependsOn": [ "Buffer Overflow"],
           "children": [
             { "name": "L10_FuzzingTraining",

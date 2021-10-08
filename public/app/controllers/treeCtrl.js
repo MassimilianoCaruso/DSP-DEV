@@ -1,4 +1,4 @@
-var dsp_chartCtrl = function ($scope, AjaxService, Notification) {
+var dsp_chartCtrl = function ($scope, AjaxService, WalkerService, Notification) {
 
 var repo = AjaxService.config;
 if(!repo){
@@ -79,7 +79,6 @@ var update = function (source) {
   var node = svg.selectAll("g.node")
       .data(nodes, function(d) { return d.id || (d.id = ++i); })
 
-
   // Enter any new nodes at the parent's previous position
   var nodeEnter = node.enter().append("g")
       .attr("class", "node")
@@ -110,18 +109,18 @@ var update = function (source) {
   // Add picture to root node
   nodeEnter.append('image')
       .attr('xlink:href',function(d){ 
-        if (d.name=="HackingCourse") return d.photo;
+        if (!d.parent) return d.photo;
         })
       .attr('height',function(d){ 
-        if (d.name=="HackingCourse") return 220 })
+        if (!d.parent) return 220 })
       .attr('width',function(d){ 
-        if (d.name=="HackingCourse") return 220 })
+        if (!d.parent) return 220 })
       .attr('transform', function(d){ 
-        if (d.name=="HackingCourse") return 'rotate(270 0 0)'})
+        if (!d.parent) return 'rotate(270 0 0)'})
       .attr('x',function(d){ 
-        if (d.name=="HackingCourse") return -108 })
+        if (!d.parent) return -108 })
       .attr('y',function(d){ 
-        if (d.name=="HackingCourse") return -85 });
+        if (!d.parent) return -85 });
     
   nodeEnter.append("circle")
       .attr("r", 1e-6)
@@ -144,7 +143,7 @@ var update = function (source) {
             })
             .style("fill", function (d) { return d.color;})
             .text(function(d) {
-              if (d.name!="HackingCourse") return d.name;
+              if (d.parent) return d.name;
             });
 
   // Transition nodes to their new position
@@ -160,9 +159,11 @@ var update = function (source) {
       .style("fill-opacity", 1)
       .attr("transform", function(d) { return d.x < 180 ? "translate(0)" : "rotate(180)translate(-" + (d.name.length + 50)  + ")"; });
 
+  /*
+  *    
   var nodeExit = node.exit().transition()
       .duration(duration)
-      //.attr("transform", function(d) { return "diagonal(" + source.y + "," + source.x + ")"; })
+      .attr("transform", function(d) { return "diagonal(" + source.y + "," + source.x + ")"; })
       .remove();
 
   nodeExit.select("circle")
@@ -170,6 +171,8 @@ var update = function (source) {
 
   nodeExit.select("text")
       .style("fill-opacity", 1e-6);
+  *
+  */
 
   // Update the links
   var link = svg.selectAll("path.link")
@@ -188,7 +191,8 @@ var update = function (source) {
       .duration(duration)
       .attr("d", diagonal);
 
-  // Transition exiting nodes to the parent's new position
+  /* 
+  * Transition exiting nodes to the parent's new position
   link.exit().transition()
       .duration(duration)
       .attr("d", function(d) {
@@ -196,6 +200,8 @@ var update = function (source) {
         return diagonal({source: o, target: o});
       })
       .remove();
+    *
+    */
 
   // Stash the old positions for transition
   nodes.forEach(function(d) {
@@ -264,20 +270,27 @@ var collapse = function(d) {
 // The stepper loads the labs of the selected training path
 var click = function (d){
   if (d.parent && !d.children) {
-    window.open(url+'lab/use/NS/'+d.name, '_blank');
+    if (WalkerService.findLab(repo.name, d.name)) {
+    window.open(url+'lab/use/'+repo.name+'/'+d.name, '_blank');
+    } else {
+      Notification('Server error: the selected lab isn\'t located in the user repository.','error');
+    }
   } else if(d.kinshipDegree=="secondChild") {
         vm.numlab=d.children.length;
         for(var i=0; i< d.children.length; i++) {
           var lab=d.children[i].name;
-          $('#iframe'+i).attr('src', url+'lab/use/'+repo.name+'/'+lab); //AL POSTO DI NS METTERE IL PERCORSO DI CONFIG_USER
-          ///lab/:action/:repo/
+          if(!WalkerService.findLab(repo.name, lab)) {
+            Notification('Server error:'+lab+' isn\'t located in the user repository.','error');
+          } else {
+            $('#iframe'+i).attr('src', url+'lab/use/'+repo.name+'/'+lab);
+          }
       }
     }
 }
 
 // Double click to scroll down in the page up to the stepper
 var dblclick = function (d) {
-  if(d.color) {
+  if(d.kinshipDegree=="secondChild") {
     document.getElementById("doneButton").click(); // Go to the first step
     $('html,body').animate({
       scrollTop: $(".step").offset().top}, 'slow');

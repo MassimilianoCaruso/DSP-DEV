@@ -35,6 +35,18 @@
   width: 200px;  
 }
 
+.filters .panel-heading {
+  background-color: #2196F3;
+  color: white;
+}
+
+.texbox {
+  position: absolute; /*Change to "fixed" to scroll with the filter fixed in that position*/
+  top: 120px;
+  left:35px; 
+  width: 270px;  
+}
+
 .filters .btn {
     margin: 1px;
     line-height: 1.3;
